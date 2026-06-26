@@ -188,6 +188,23 @@ section {
     font-size: clamp(0.95rem, 1.5vw, 1.08rem);
 }
 
+.role-parts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.role-parts span {
+    border: 1px solid rgba(56, 232, 255, 0.26);
+    border-radius: 999px;
+    background: rgba(56, 232, 255, 0.08);
+    color: var(--text);
+    font-size: 0.86rem;
+    font-weight: 850;
+    padding: 8px 14px;
+}
+
 .hero-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -260,46 +277,78 @@ section {
 }
 
 .portrait-card {
+    position: relative;
+    isolation: isolate;
     width: min(430px, 88vw);
     aspect-ratio: 1;
     padding: 12px;
-    border: 1px solid rgba(56, 232, 255, 0.24);
     border-radius: 50%;
+    border: 1px solid rgba(56, 232, 255, 0.24);
     background:
         linear-gradient(var(--panel), var(--panel)) padding-box,
         linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
-    box-shadow: 0 0 120px rgba(56, 232, 255, 0.17);
+    box-shadow: 0 0 70px rgba(56, 232, 255, 0.13);
 }
 
 .portrait-card img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
 
-.floating-card {
+.floating-roles {
     position: absolute;
-    right: 0;
-    bottom: 12%;
-    width: min(250px, 70vw);
-    padding: 18px;
+    inset: 0;
+    pointer-events: none;
+}
+
+.floating-role {
+    position: absolute;
+    min-width: 88px;
+    padding: 10px 14px;
     border: 1px solid var(--line);
     border-radius: 8px;
-    background: rgba(13, 18, 32, 0.86);
+    background: rgba(13, 18, 32, 0.82);
     backdrop-filter: blur(16px);
     box-shadow: var(--shadow);
-}
-
-.floating-card span {
-    color: var(--muted);
-    font-size: 0.82rem;
-}
-
-.floating-card strong {
-    display: block;
-    margin-top: 4px;
     color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    pointer-events: auto;
+    animation: role-float 4s ease-in-out infinite;
+}
+
+.floating-role-qa {
+    top: 18%;
+    right: 6%;
+}
+
+.floating-role-frontend {
+    left: 0;
+    bottom: 30%;
+    animation-delay: -1.2s;
+}
+
+.floating-role-ux {
+    right: 11%;
+    bottom: 8%;
+    animation-delay: -2.4s;
+}
+
+@keyframes role-float {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(1deg);
+    }
 }
 
 .section-heading {
@@ -709,8 +758,8 @@ footer {
         min-height: auto;
     }
 
-    .floating-card {
-        right: 6%;
+    .floating-role-frontend {
+        left: 5%;
     }
 }
 
@@ -753,9 +802,24 @@ footer {
         height: 200px;
     }
 
-    .floating-card {
-        position: static;
-        width: 100%;
-        margin-top: 16px;
+    .floating-role {
+        min-width: 74px;
+        padding: 8px 11px;
+        font-size: 0.78rem;
+    }
+
+    .floating-role-qa {
+        top: 8%;
+        right: 1%;
+    }
+
+    .floating-role-frontend {
+        left: 0;
+        bottom: 20%;
+    }
+
+    .floating-role-ux {
+        right: 6%;
+        bottom: 1%;
     }
 }
